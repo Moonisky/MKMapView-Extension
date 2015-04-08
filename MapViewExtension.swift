@@ -9,34 +9,9 @@
 import UIKit
 import MapKit
 
-/// 墨卡托坐标系偏移量
-private let MERCATOR_OFFSET:Double = 268435456
-/// 墨卡托坐标系基本半径
-private let MERCATOR_RADIUS:Double = 85445659.44705395
-
 extension MKMapView {
     
     // MARK: - 地图相关的转换方法
-    
-    /// 获取当前一个经度对应多少像素值（空间的X值）
-    func longitudeToPixelSpaceX(longitude: Double) -> Double {
-        return round(MERCATOR_OFFSET + MERCATOR_RADIUS * longitude * M_PI / 180)
-    }
-    
-    /// 获取当前一个纬度对应多少像素值（空间的Y值）
-    func latitudeToPixelSpaceY(latitude: Double) -> Double {
-        return round(MERCATOR_OFFSET - MERCATOR_RADIUS * Double(logf((1 + sinf(Float(latitude * M_PI / 180))) / (1 - sinf(Float(latitude * M_PI / 180))))) / 2)
-    }
-    
-    /// 获取当前像素值（空间的X值）对应多少经度
-    func pixelSpaceXToLongitude(pixelX: Double) -> Double {
-        return ((round(pixelX) - MERCATOR_OFFSET) / MERCATOR_RADIUS) * 180 / M_PI
-    }
-    
-    /// 获取当前像素值（空间的Y值）对应多少纬度
-    func pixelSpaceYToLatitude(pixelY: Double) -> Double {
-        return (M_PI / 2 - 2 * atan(exp((round(pixelY) - MERCATOR_OFFSET) / MERCATOR_RADIUS))) * 180 / M_PI
-    }
 
     /// MKMapView 的缩放级别
     var zoomLevel: UInt {
