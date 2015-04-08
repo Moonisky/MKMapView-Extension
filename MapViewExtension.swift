@@ -9,7 +9,9 @@
 import UIKit
 import MapKit
 
+/// 墨卡托坐标系偏移量
 private let MERCATOR_OFFSET:Double = 268435456
+/// 墨卡托坐标系基本半径
 private let MERCATOR_RADIUS:Double = 85445659.44705395
 
 extension MKMapView {
@@ -35,106 +37,84 @@ extension MKMapView {
     func pixelSpaceYToLatitude(pixelY: Double) -> Double {
         return (M_PI / 2 - 2 * atan(exp((round(pixelY) - MERCATOR_OFFSET) / MERCATOR_RADIUS))) * 180 / M_PI
     }
-    
-    /// 获取 MKMapView 的缩放级别
-    func getZoomLevel() -> Double {
-        // 当前用户可见的地图
-        let currentRegion = self.region
-        // 当前可视区域的三维坐标
-        let currentSpan = currentRegion.span
-        // 当前可视区域的中心（角度表示法）
-        let currentCenterCoordinate = currentRegion.center
-        // 获取当前可视区域左右两边的纬度
-        let leftLongitude = currentCenterCoordinate.longitude - (currentSpan.longitudeDelta / 2)
-        let rightLongitude = currentCenterCoordinate.longitude + (currentSpan.longitudeDelta / 2)
-        // 当前显示视窗的尺寸大小（像素）
-        let mapSizeInPixels = self.bounds.size
-        
-        // 获取屏幕左右两边的完整缩放像素大小
-        let leftPixel = self.longitudeToPixelSpaceX(leftLongitude)
-        let rightPixel = self.longitudeToPixelSpaceX(rightLongitude)
-        // 屏幕宽度
-        let pixelDelta = abs(rightPixel - leftPixel)
-        
-        // 实际上显示的像素值
-        let zoomScale = Double(mapSizeInPixels.width) / Double(pixelDelta)
-        // 反转指数
-        let zoomExponent = log2(zoomScale)
-        // 调整比例
-        let zoomLevel = zoomExponent + 20
-        return zoomLevel
-    }
-    
-    /// 根据缩放级别来获取目的区域的三维坐标
-    func coordinateSpanWithMapView(mapView: MKMapView, centerCoordinate center: CLLocationCoordinate2D, andZoomLevel level: UInt) -> MKCoordinateSpan {
-        
-        // 将中心经纬度转换为像素空间
-        let centerPixelX = self.longitudeToPixelSpaceX(center.longitude)
-        let centerPixelY = self.latitudeToPixelSpaceY(center.latitude)
-        
-        // 根据缩放级别决定比例值
-        let zoomExponent = 20 - level
-        let zoomScale = pow(2, Double(zoomExponent))
-        
-        // 在像素区域内设置地图尺寸比例
-        let mapSizeInPixels = mapView.bounds.size
-        let scaledMapWidth = Double(mapSizeInPixels.width) * zoomScale
-        let scaledMapHeight = Double(mapSizeInPixels.height) * zoomScale
-        
-        // 设定左上角像素位置
-        let topLeftPixelX = centerPixelX - (scaledMapWidth / 2)
-        let topLeftPixelY = centerPixelY - (scaledMapHeight / 2)
-        
-        // 寻找左右经度的三维坐标值
-        let minLng = self.pixelSpaceXToLongitude(topLeftPixelX)
-        let maxLng = self.pixelSpaceXToLongitude(topLeftPixelX + scaledMapWidth)
-        let longitudeDelta = maxLng - minLng
-        
-        // 寻找上下纬度的三维坐标值
-        let minLat = self.pixelSpaceYToLatitude(topLeftPixelY)
-        let maxLat = self.pixelSpaceYToLatitude(topLeftPixelY + scaledMapHeight)
-        let latitudeDelta = -1 * (maxLat - minLat)
-        
-        // 创建并返回三维坐标
-        let span = MKCoordinateSpanMake(latitudeDelta, longitudeDelta)
-        return span
+
+    /// MKMapView 的缩放级别
+    var zoomLevel: UInt {
+        get {
+            // 缩放比例
+            let zoomScale = log2(self.visibleMapRect.size.width / Double(self.bounds.size.width))
+            // 实际缩放级别
+            let zoomLevel = 20 - zoomScale
+            return UInt(ceil(zoomLevel))
+        }
+        set (newZoomLevel){
+            self.setCenterCoordinate(self.userLocation.coordinate, zoomLevel: newZoomLevel, animated: true)
+        }
     }
     
     /// 以缩放级别来设置当前地图中心点
-    func setCenterCoordinate(center: CLLocationCoordinate2D, zoomLevel level: UInt, animated: Bool) {
-        // 设置缩放级别的最大值为28
-        let zoomLevel = min(level, 28)
+    func setCenterCoordinate(currentCenter: CLLocationCoordinate2D, zoomLevel level: UInt, animated: Bool) {
         
-        // 使用缩放级别来计算区域
-        let newSpan = self.coordinateSpanWithMapView(self, centerCoordinate: center, andZoomLevel: level)
-        let newRegion = MKCoordinateRegionMake(center, newSpan)
+        // 获取当前地图中心点坐标（使用坐标系）
+        let currentCenterPoint = MKMapPointForCoordinate(currentCenter)
+        // 获取缩放比例
+        let zoomScale = exp2(Double(level))
+        // 计算当前屏幕的大小和原点
+        let mapSize = MKMapSizeMake(Double(self.bounds.size.width) * zoomScale, Double(self.bounds.size.height) * zoomScale)
+        let mapOrigin = MKMapPointMake(currentCenterPoint.x - mapSize.width / 2, currentCenterPoint.y - mapSize.height / 2)
         
-        self.setRegion(newRegion, animated: animated)
+         self.visibleMapRect = self.mapRectThatFits(MKMapRect(origin: mapOrigin, size: mapSize))
     }
     
     /// 缩放级别放大一级
     func zoomIn() -> Bool {
-        var zoomLevel = self.getZoomLevel()
+        var zoomLevel = self.zoomLevel
         let center = self.userLocation.coordinate
-        zoomLevel += 1.0
-        if zoomLevel > 18 {
+        zoomLevel += 1
+        if zoomLevel > 19 {
             return false
         }else {
-            self.setCenterCoordinate(center, zoomLevel: UInt(zoomLevel), animated: true)
+            self.setCenterCoordinate(center, zoomLevel: zoomLevel, animated: true)
             return true
         }
     }
     
     /// 缩放级别缩小一级
     func zoomOut() -> Bool {
-        var zoomLevel = self.getZoomLevel()
+        var zoomLevel = self.zoomLevel
         let center = self.userLocation.coordinate
-        zoomLevel -= 1.0
+        zoomLevel -= 1
         if zoomLevel < 0 {
             return false
         }else {
-            self.setCenterCoordinate(center, zoomLevel: UInt(zoomLevel), animated: true)
+            self.setCenterCoordinate(center, zoomLevel: zoomLevel, animated: true)
             return true
+        }
+    }
+    
+    /// 设定指南针是否显示
+    func isShowCompass(show: Bool) {
+        if !show {
+            var mapSubviews = self.subviews
+            for view in mapSubviews {
+                // 移除指南针
+                if view.isKindOfClass(NSClassFromString("MKCompassView")) {
+                    view.removeFromSuperview()
+                }
+            }
+        }
+    }
+    
+    /// 设定是否显示左下角的跳转标签
+    func isShowAttributionLabel(show: Bool) {
+        if !show {
+            var mapSubviews = self.subviews
+            for view in mapSubviews {
+                // 移除标签
+                if view.isKindOfClass(NSClassFromString("MKAttributionLabel")) {
+                    view.removeFromSuperview()
+                }
+            }
         }
     }
 }
