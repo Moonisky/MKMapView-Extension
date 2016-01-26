@@ -5,7 +5,7 @@ This is a MKMapView extension written by Swift for supporting zoom level, the co
 
 目前，本扩展支持以下几种功能：
 
-From now on, this extension support the following functionalities:
+From now on, this extension supports the following functionalities:
 
 * 缩放等级
 * 可以决定某些删不掉的地图额外元素的显示
