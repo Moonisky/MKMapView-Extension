@@ -14,10 +14,22 @@ class ViewController: UIViewController {
 
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var lblZoomLevel: UILabel!
+    @IBOutlet private weak var btnCompass: UIButton!
+    private var locationManager: CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        lblZoomLevel.adjustsFontSizeToFitWidth = true
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager = CLLocationManager()
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.delegate = self
+            locationManager.startUpdatingLocation()
+            locationManager.startUpdatingHeading()
+            
+            mapView.userTrackingMode = .FollowWithHeading
+            btnCompass.hidden = false
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -32,13 +44,13 @@ class ViewController: UIViewController {
     
     @IBAction func handleLBAttributedLabel(sender: UIButton) {
         let showsAttributionLabel = mapView.showsLegalLabel
-        sender.setTitle(showsAttributionLabel ? "Show Lower Left Label" : "Hide Lower Left Label", forState: .Normal)
+        sender.setTitle(showsAttributionLabel ? "Show Label" : "Hide Label", forState: .Normal)
         mapView.showsLegalLabel = !showsAttributionLabel
     }
     
     @IBAction func handleRBImageView(sender: UIButton) {
         let showsImageView = mapView.showsMapInfoImageView
-        sender.setTitle(showsImageView ? "Show Lower Right Image" : "Hide Lower Right Image", forState: .Normal)
+        sender.setTitle(showsImageView ? "Show Image" : "Hide Image", forState: .Normal)
         mapView.showsMapInfoImageView = !showsImageView
     }
 
@@ -52,5 +64,21 @@ class ViewController: UIViewController {
         lblZoomLevel.text = "Current Zoom Level: \(mapView.zoomLevel)"
     }
     
+    @IBAction func handleCompass(sender: UIButton) {
+        let showsCompass: Bool
+        if #available(iOS 9.0, *) {
+            showsCompass = mapView.showsCompass
+        } else {
+            showsCompass = mapView.showsCompassView
+        }
+        sender.setTitle(showsCompass ? "Show Compass" : "Hide Compass", forState: .Normal)
+        if #available(iOS 9.0, *) {
+            mapView.showsCompass = !showsCompass
+        } else {
+            mapView.showsCompassView = !showsCompass
+        }
+    }
 }
+
+extension ViewController: CLLocationManagerDelegate { }
 

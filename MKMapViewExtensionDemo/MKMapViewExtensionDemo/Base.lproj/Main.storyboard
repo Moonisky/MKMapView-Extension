@@ -17,50 +17,61 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJW-u8-O0h">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJW-u8-O0h">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="pih-dK-0pg"/>
                                 </connections>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JaO-hu-c0W">
-                                <rect key="frame" x="8" y="562" width="149" height="30"/>
-                                <state key="normal" title="Hide Lower Left Label"/>
+                                <rect key="frame" x="8" y="565" width="61" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="Hide Label"/>
                                 <connections>
                                     <action selector="handleLBAttributedLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dOr-9H-ajy"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANP-Qs-ZPx">
-                                <rect key="frame" x="429" y="562" width="163" height="30"/>
-                                <state key="normal" title="Hide Lower Right Image"/>
+                                <rect key="frame" x="528" y="565" width="64" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="Hide Image"/>
                                 <connections>
                                     <action selector="handleRBImageView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gop-ZJ-Tf8"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Svy-xH-bLA">
-                                <rect key="frame" x="8" y="524" width="56" height="30"/>
+                                <rect key="frame" x="8" y="527" width="56" height="30"/>
                                 <state key="normal" title="Zoom In"/>
                                 <connections>
                                     <action selector="handleZoomIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zmH-Bl-Ngy"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0a6-O7-Jdn">
-                                <rect key="frame" x="523" y="524" width="69" height="30"/>
+                                <rect key="frame" x="523" y="527" width="69" height="30"/>
                                 <state key="normal" title="Zoom Out"/>
                                 <connections>
                                     <action selector="handleZoomOut:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XD6-r4-TvX"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Zoom Level：0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxu-el-NHm">
-                                <rect key="frame" x="211" y="528.5" width="178.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Zoom Level：0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xxu-el-NHm">
+                                <rect key="frame" x="220.5" y="533" width="159.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7MV-GI-mJR">
+                                <rect key="frame" x="259" y="565" width="82" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="Hide Compass"/>
+                                <connections>
+                                    <action selector="handleCompass:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ozu-Ec-V7i"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ANP-Qs-ZPx" secondAttribute="trailing" constant="8" id="Cqx-nc-cIY"/>
+                            <constraint firstItem="7MV-GI-mJR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="HkC-Vk-6nT"/>
                             <constraint firstItem="0a6-O7-Jdn" firstAttribute="centerY" secondItem="xxu-el-NHm" secondAttribute="centerY" id="POP-vH-7En"/>
                             <constraint firstItem="eJW-u8-O0h" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="QBI-0x-TkN"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ANP-Qs-ZPx" secondAttribute="bottom" constant="8" id="Suo-Lt-y2H"/>
@@ -69,6 +80,7 @@
                             <constraint firstItem="JaO-hu-c0W" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="a1g-Xg-jQ0"/>
                             <constraint firstAttribute="trailing" secondItem="0a6-O7-Jdn" secondAttribute="trailing" constant="8" id="b7n-qT-wiV"/>
                             <constraint firstItem="Svy-xH-bLA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="bnB-Yx-gYF"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="7MV-GI-mJR" secondAttribute="bottom" constant="8" id="eV1-Tp-qao"/>
                             <constraint firstItem="JaO-hu-c0W" firstAttribute="top" secondItem="Svy-xH-bLA" secondAttribute="bottom" constant="8" id="i3q-x3-kkW"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="JaO-hu-c0W" secondAttribute="bottom" constant="8" id="lC6-W5-IqU"/>
                             <constraint firstAttribute="trailing" secondItem="eJW-u8-O0h" secondAttribute="trailing" id="mNv-0C-SZf"/>
@@ -77,6 +89,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnCompass" destination="7MV-GI-mJR" id="pEv-iM-2yV"/>
                         <outlet property="lblZoomLevel" destination="xxu-el-NHm" id="480-ar-IoS"/>
                         <outlet property="mapView" destination="eJW-u8-O0h" id="56h-oh-kMR"/>
                     </connections>

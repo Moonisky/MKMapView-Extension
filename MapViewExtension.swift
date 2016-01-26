@@ -22,13 +22,11 @@ extension MKMapView {
     var zoomLevel: UInt {
         get {
             let region = self.region
-            
             let centerPixelX = region.center.longitude.pixelSpaceXForLongitude
             let topLeftPixelX = (region.center.longitude - region.span.longitudeDelta / 2).pixelSpaceXForLongitude
             
             let scaledMapWidth = (centerPixelX - topLeftPixelX) * 2
-            let mapSizeInPixels = self.bounds.size
-            let zoomScale = scaledMapWidth / Double(mapSizeInPixels.width)
+            let zoomScale = scaledMapWidth / Double(self.bounds.width)
             let zoomExponent = log(zoomScale) / log(2)
             let zoomLevel = 20 - zoomExponent
             
@@ -53,8 +51,9 @@ extension MKMapView {
     }
     
     /// Get corresponding map region based on zoom level and center coordinate.
-    func getCoordinateRegionWithCenterCoordinate(var centerCoordinate: CLLocationCoordinate2D, andZoomLevel: UInt) -> MKCoordinateRegion {
+    func getCoordinateRegionWithCenterCoordinate(centerCoordinate: CLLocationCoordinate2D, andZoomLevel: UInt) -> MKCoordinateRegion {
         // clamp lat/long values to appropriate ranges
+        var centerCoordinate = centerCoordinate
         centerCoordinate.latitude = min(max(-90, centerCoordinate.latitude), 90)
         centerCoordinate.longitude = fmod(centerCoordinate.longitude, 180)
         
@@ -105,13 +104,11 @@ extension MKMapView {
     }
     
     func zoomIn() {
-        let zoomLevel = self.zoomLevel
-        self.zoomLevel = zoomLevel + 1
+        self.zoomLevel += 1
     }
     
     func zoomOut() {
-        let zoomLevel = self.zoomLevel
-        self.zoomLevel = zoomLevel - 1
+        self.zoomLevel -= 1
     }
     
     // MARK: Map UI Handle
@@ -192,8 +189,16 @@ extension MKMapView {
     private func decideView(view: UIView, shouldShow show: Bool) {
         if show {
             self.addSubview(view)
+            view.alpha = 0
+            UIView.animateWithDuration(0.5) {
+                view.alpha = 1
+            }
         } else {
-            view.removeFromSuperview()
+            UIView.animateWithDuration(0.5, animations: {
+                view.alpha = 0
+            }) { finish in
+                view.removeFromSuperview()
+            }
         }
     }
     
