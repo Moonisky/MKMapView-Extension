@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MKMapViewExtensionDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJW-u8-O0h">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="pih-dK-0pg"/>
+                                </connections>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JaO-hu-c0W">
+                                <rect key="frame" x="8" y="562" width="149" height="30"/>
+                                <state key="normal" title="Hide Lower Left Label"/>
+                                <connections>
+                                    <action selector="handleLBAttributedLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dOr-9H-ajy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANP-Qs-ZPx">
+                                <rect key="frame" x="429" y="562" width="163" height="30"/>
+                                <state key="normal" title="Hide Lower Right Image"/>
+                                <connections>
+                                    <action selector="handleRBImageView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gop-ZJ-Tf8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Svy-xH-bLA">
+                                <rect key="frame" x="8" y="524" width="56" height="30"/>
+                                <state key="normal" title="Zoom In"/>
+                                <connections>
+                                    <action selector="handleZoomIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zmH-Bl-Ngy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0a6-O7-Jdn">
+                                <rect key="frame" x="523" y="524" width="69" height="30"/>
+                                <state key="normal" title="Zoom Out"/>
+                                <connections>
+                                    <action selector="handleZoomOut:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XD6-r4-TvX"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Zoom Level：0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxu-el-NHm">
+                                <rect key="frame" x="211" y="528.5" width="178.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ANP-Qs-ZPx" secondAttribute="trailing" constant="8" id="Cqx-nc-cIY"/>
+                            <constraint firstItem="0a6-O7-Jdn" firstAttribute="centerY" secondItem="xxu-el-NHm" secondAttribute="centerY" id="POP-vH-7En"/>
+                            <constraint firstItem="eJW-u8-O0h" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="QBI-0x-TkN"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ANP-Qs-ZPx" secondAttribute="bottom" constant="8" id="Suo-Lt-y2H"/>
+                            <constraint firstItem="eJW-u8-O0h" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="U6J-jA-NF6"/>
+                            <constraint firstItem="ANP-Qs-ZPx" firstAttribute="top" secondItem="0a6-O7-Jdn" secondAttribute="bottom" constant="8" id="Vax-Y2-e7N"/>
+                            <constraint firstItem="JaO-hu-c0W" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="a1g-Xg-jQ0"/>
+                            <constraint firstAttribute="trailing" secondItem="0a6-O7-Jdn" secondAttribute="trailing" constant="8" id="b7n-qT-wiV"/>
+                            <constraint firstItem="Svy-xH-bLA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="bnB-Yx-gYF"/>
+                            <constraint firstItem="JaO-hu-c0W" firstAttribute="top" secondItem="Svy-xH-bLA" secondAttribute="bottom" constant="8" id="i3q-x3-kkW"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="JaO-hu-c0W" secondAttribute="bottom" constant="8" id="lC6-W5-IqU"/>
+                            <constraint firstAttribute="trailing" secondItem="eJW-u8-O0h" secondAttribute="trailing" id="mNv-0C-SZf"/>
+                            <constraint firstItem="xxu-el-NHm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mg1-y9-OLb"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="eJW-u8-O0h" secondAttribute="bottom" constant="90" id="nIX-vd-wZt"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="lblZoomLevel" destination="xxu-el-NHm" id="480-ar-IoS"/>
+                        <outlet property="mapView" destination="eJW-u8-O0h" id="56h-oh-kMR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="243" y="339"/>
+        </scene>
+    </scenes>
+</document>
