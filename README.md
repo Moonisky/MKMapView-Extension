@@ -1,16 +1,25 @@
 # MKMapView-Extension
 这是关于 MKMapView 写的一个基于swift的扩展，可以扩展 MKMapView 的相关功能，减少复用代码量。
+
 This is a MKMapView extension written by Swift for supporting zoom level, the code is referenced from Troy Brant's [Blog](http://troybrant.net/blog/2010/01/set-the-zoom-level-of-an-mkmapview/).
 
 目前，本扩展支持以下几种功能：
+
 From now on, this extension support the following functionalities:
 
-* 缩放等级 (zoom level)
-* 可以决定某些删不掉的地图额外元素的显示 (you can decide whether to show the addtional map components which cannot be removed normally)
-* 为 MKMapPoint、MKMapSize、MKMapRect 添加了 Geometry 几何功能，就像 CGPoint、CGSize、CGMapRect 一样 (add geometrical capability extensions for MKMapPoint, MKMapSize and MKMapRect, just like CGPoint, CGSize and CGMapRect)
+* 缩放等级
+* 可以决定某些删不掉的地图额外元素的显示
+* 为 MKMapPoint、MKMapSize、MKMapRect 添加了 Geometry 几何功能，就像 CGPoint、CGSize、CGMapRect 一样
+
+* Zoom level
+* You can decide whether to show the addtional map components which cannot be removed normally
+* Add geometrical capability extensions for MKMapPoint, MKMapSize and MKMapRect, just like CGPoint, CGSize and CGMapRect
+
 
 ##更新说明 (Update Log)
+
 **2016.01.26**
+
 1. 增加了移除右下角“高德地图”图片的方法
 2. 之前的 ZoomLevel 实现机制不再可用，因此换用 [Troy Brant](http://troybrant.net/blog) 所介绍的方法。
 3. 现在移除地图额外元素之后，你还可以将它们添加回去了
