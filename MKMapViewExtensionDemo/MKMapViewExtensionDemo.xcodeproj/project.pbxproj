@@ -12,13 +12,21 @@
 		D81998C91C562A25004F8211 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81998C71C562A25004F8211 /* Main.storyboard */; };
 		D81998CB1C562A25004F8211 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D81998CA1C562A25004F8211 /* Assets.xcassets */; };
 		D81998CE1C562A25004F8211 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81998CC1C562A25004F8211 /* LaunchScreen.storyboard */; };
-		D81998D61C562A32004F8211 /* MapViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81998D51C562A32004F8211 /* MapViewExtension.swift */; };
 		D82AF8F11C573FD300A622CA /* MKMapViewExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82AF8F01C573FD300A622CA /* MKMapViewExtensionTests.swift */; };
-		D82AF8F81C57401800A622CA /* MapViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81998D51C562A32004F8211 /* MapViewExtension.swift */; };
+		D82AF9011C57762700A622CA /* MapViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82AF9001C57762700A622CA /* MapViewExtension.swift */; };
+		D82AF9021C57762700A622CA /* MapViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82AF9001C57762700A622CA /* MapViewExtension.swift */; };
+		D82AF90A1C57763E00A622CA /* MKMapViewExtensionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82AF9091C57763E00A622CA /* MKMapViewExtensionUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		D82AF8F31C573FD300A622CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D81998B81C562A25004F8211 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D81998BF1C562A25004F8211;
+			remoteInfo = MKMapViewExtensionDemo;
+		};
+		D82AF90C1C57763E00A622CA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D81998B81C562A25004F8211 /* Project object */;
 			proxyType = 1;
@@ -35,10 +43,13 @@
 		D81998CA1C562A25004F8211 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D81998CD1C562A25004F8211 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D81998CF1C562A25004F8211 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D81998D51C562A32004F8211 /* MapViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewExtension.swift; sourceTree = "<group>"; };
 		D82AF8EE1C573FD300A622CA /* MKMapViewExtensionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MKMapViewExtensionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D82AF8F01C573FD300A622CA /* MKMapViewExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapViewExtensionTests.swift; sourceTree = "<group>"; };
 		D82AF8F21C573FD300A622CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D82AF9001C57762700A622CA /* MapViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewExtension.swift; path = ../MapViewExtension.swift; sourceTree = "<group>"; };
+		D82AF9071C57763E00A622CA /* MKMapViewExtensionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MKMapViewExtensionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D82AF9091C57763E00A622CA /* MKMapViewExtensionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapViewExtensionUITests.swift; sourceTree = "<group>"; };
+		D82AF90B1C57763E00A622CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,14 +67,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D82AF9041C57763E00A622CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		D81998B71C562A25004F8211 = {
 			isa = PBXGroup;
 			children = (
+				D82AF9001C57762700A622CA /* MapViewExtension.swift */,
 				D81998C21C562A25004F8211 /* MKMapViewExtensionDemo */,
 				D82AF8EF1C573FD300A622CA /* MKMapViewExtensionTests */,
+				D82AF9081C57763E00A622CA /* MKMapViewExtensionUITests */,
 				D81998C11C562A25004F8211 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,6 +93,7 @@
 			children = (
 				D81998C01C562A25004F8211 /* MKMapViewExtensionDemo.app */,
 				D82AF8EE1C573FD300A622CA /* MKMapViewExtensionTests.xctest */,
+				D82AF9071C57763E00A622CA /* MKMapViewExtensionUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -80,7 +101,6 @@
 		D81998C21C562A25004F8211 /* MKMapViewExtensionDemo */ = {
 			isa = PBXGroup;
 			children = (
-				D81998D51C562A32004F8211 /* MapViewExtension.swift */,
 				D81998C31C562A25004F8211 /* AppDelegate.swift */,
 				D81998C51C562A25004F8211 /* ViewController.swift */,
 				D81998C71C562A25004F8211 /* Main.storyboard */,
@@ -98,6 +118,15 @@
 				D82AF8F21C573FD300A622CA /* Info.plist */,
 			);
 			path = MKMapViewExtensionTests;
+			sourceTree = "<group>";
+		};
+		D82AF9081C57763E00A622CA /* MKMapViewExtensionUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D82AF9091C57763E00A622CA /* MKMapViewExtensionUITests.swift */,
+				D82AF90B1C57763E00A622CA /* Info.plist */,
+			);
+			path = MKMapViewExtensionUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +167,24 @@
 			productReference = D82AF8EE1C573FD300A622CA /* MKMapViewExtensionTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		D82AF9061C57763E00A622CA /* MKMapViewExtensionUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D82AF90E1C57763E00A622CA /* Build configuration list for PBXNativeTarget "MKMapViewExtensionUITests" */;
+			buildPhases = (
+				D82AF9031C57763E00A622CA /* Sources */,
+				D82AF9041C57763E00A622CA /* Frameworks */,
+				D82AF9051C57763E00A622CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D82AF90D1C57763E00A622CA /* PBXTargetDependency */,
+			);
+			name = MKMapViewExtensionUITests;
+			productName = MKMapViewExtensionUITests;
+			productReference = D82AF9071C57763E00A622CA /* MKMapViewExtensionUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -152,6 +199,10 @@
 						CreatedOnToolsVersion = 7.2;
 					};
 					D82AF8ED1C573FD300A622CA = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = D81998BF1C562A25004F8211;
+					};
+					D82AF9061C57763E00A622CA = {
 						CreatedOnToolsVersion = 7.2;
 						TestTargetID = D81998BF1C562A25004F8211;
 					};
@@ -172,6 +223,7 @@
 			targets = (
 				D81998BF1C562A25004F8211 /* MKMapViewExtensionDemo */,
 				D82AF8ED1C573FD300A622CA /* MKMapViewExtensionTests */,
+				D82AF9061C57763E00A622CA /* MKMapViewExtensionUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -194,6 +246,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D82AF9051C57763E00A622CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -202,7 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D81998C61C562A25004F8211 /* ViewController.swift in Sources */,
-				D81998D61C562A32004F8211 /* MapViewExtension.swift in Sources */,
+				D82AF9011C57762700A622CA /* MapViewExtension.swift in Sources */,
 				D81998C41C562A25004F8211 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,7 +271,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D82AF8F11C573FD300A622CA /* MKMapViewExtensionTests.swift in Sources */,
-				D82AF8F81C57401800A622CA /* MapViewExtension.swift in Sources */,
+				D82AF9021C57762700A622CA /* MapViewExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D82AF9031C57763E00A622CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D82AF90A1C57763E00A622CA /* MKMapViewExtensionUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +290,11 @@
 			isa = PBXTargetDependency;
 			target = D81998BF1C562A25004F8211 /* MKMapViewExtensionDemo */;
 			targetProxy = D82AF8F31C573FD300A622CA /* PBXContainerItemProxy */;
+		};
+		D82AF90D1C57763E00A622CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D81998BF1C562A25004F8211 /* MKMapViewExtensionDemo */;
+			targetProxy = D82AF90C1C57763E00A622CA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -373,6 +445,30 @@
 			};
 			name = Release;
 		};
+		D82AF90F1C57763E00A622CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = MKMapViewExtensionUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.1-xing.MKMapViewExtensionUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = MKMapViewExtensionDemo;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		D82AF9101C57763E00A622CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = MKMapViewExtensionUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.1-xing.MKMapViewExtensionUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = MKMapViewExtensionDemo;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -399,6 +495,15 @@
 			buildConfigurations = (
 				D82AF8F51C573FD300A622CA /* Debug */,
 				D82AF8F61C573FD300A622CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D82AF90E1C57763E00A622CA /* Build configuration list for PBXNativeTarget "MKMapViewExtensionUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D82AF90F1C57763E00A622CA /* Debug */,
+				D82AF9101C57763E00A622CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

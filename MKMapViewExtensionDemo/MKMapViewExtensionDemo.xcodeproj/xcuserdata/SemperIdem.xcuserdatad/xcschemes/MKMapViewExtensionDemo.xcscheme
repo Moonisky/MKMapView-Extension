@@ -38,6 +38,16 @@
                ReferencedContainer = "container:MKMapViewExtensionDemo.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D82AF9061C57763E00A622CA"
+               BuildableName = "MKMapViewExtensionUITests.xctest"
+               BlueprintName = "MKMapViewExtensionUITests"
+               ReferencedContainer = "container:MKMapViewExtensionDemo.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
