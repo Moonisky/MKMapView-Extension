@@ -77,6 +77,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10EBB1421E1205740040D217 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D81998C71C562A25004F8211 /* Main.storyboard */,
+				D81998CA1C562A25004F8211 /* Assets.xcassets */,
+				D81998CC1C562A25004F8211 /* LaunchScreen.storyboard */,
+				D81998CF1C562A25004F8211 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		D81998B71C562A25004F8211 = {
 			isa = PBXGroup;
 			children = (
@@ -103,10 +114,7 @@
 			children = (
 				D81998C31C562A25004F8211 /* AppDelegate.swift */,
 				D81998C51C562A25004F8211 /* ViewController.swift */,
-				D81998C71C562A25004F8211 /* Main.storyboard */,
-				D81998CA1C562A25004F8211 /* Assets.xcassets */,
-				D81998CC1C562A25004F8211 /* LaunchScreen.storyboard */,
-				D81998CF1C562A25004F8211 /* Info.plist */,
+				10EBB1421E1205740040D217 /* Supporting Files */,
 			);
 			path = MKMapViewExtensionDemo;
 			sourceTree = "<group>";
@@ -197,13 +205,16 @@
 				TargetAttributes = {
 					D81998BF1C562A25004F8211 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0820;
 					};
 					D82AF8ED1C573FD300A622CA = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0820;
 						TestTargetID = D81998BF1C562A25004F8211;
 					};
 					D82AF9061C57763E00A622CA = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0820;
 						TestTargetID = D81998BF1C562A25004F8211;
 					};
 				};
@@ -408,6 +419,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1-xing.MKMapViewExtensionDemo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -420,6 +432,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1-xing.MKMapViewExtensionDemo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -431,6 +444,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1-xing.MKMapViewExtensionTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MKMapViewExtensionDemo.app/MKMapViewExtensionDemo";
 			};
 			name = Debug;
@@ -443,6 +457,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1-xing.MKMapViewExtensionTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MKMapViewExtensionDemo.app/MKMapViewExtensionDemo";
 			};
 			name = Release;
@@ -454,6 +469,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1-xing.MKMapViewExtensionUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = MKMapViewExtensionDemo;
 				USES_XCTRUNNER = YES;
 			};
@@ -466,6 +482,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1-xing.MKMapViewExtensionUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = MKMapViewExtensionDemo;
 				USES_XCTRUNNER = YES;
 			};

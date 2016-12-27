@@ -31,10 +31,10 @@ class MKMapViewExtensionUITests: XCTestCase {
     func testExample() {
         
         let app = XCUIApplication()
-        app.buttons["Hide Lower Left Label"].tap()
-        app.buttons["Show Lower Left Label"].tap()
-        app.buttons["Hide Lower Right Image"].tap()
-        app.buttons["Show Lower Right Image"].tap()
+        app.buttons["Hide Label"].tap()
+        app.buttons["Show Label"].tap()
+        app.buttons["Hide Label"].tap()
+        app.buttons["Show Label"].tap()
         
         let zoomInButton = app.buttons["Zoom In"]
         zoomInButton.tap()
