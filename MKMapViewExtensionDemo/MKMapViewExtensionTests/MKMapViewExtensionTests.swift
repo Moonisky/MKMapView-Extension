@@ -135,16 +135,16 @@ class MKMapViewExtensionTests: XCTestCase {
         rectTest(unstandard, withAimRect: (-20, -30, 30, 50))
         
         rect = MKMapRect(x: 11.25, y: 22.25, width: 33.25, height: 44.25)
-        print("insetBy" + "\(rect.insetBy(dx: 1, dy: -2))")
-        rectTest(rect.insetBy(dx: 1, dy: -2), withAimRect: (12.25, 20.25, 31.25, 48.25))
-        rect.insetInPlace(dx: 1, dy: -2)
+        print("insetBy" + "\(rect.insetBy(1, -2))")
+        rectTest(rect.insetBy(1, -2), withAimRect: (12.25, 20.25, 31.25, 48.25))
+        rect.insetInPlace(1, -2)
         print("insetInPlace" + "\(rect)")
         rectTest(rect, withAimRect: (12.25, 20.25, 31.25, 48.25))
         
         rect = MKMapRect(x: 11.25, y: 22.25, width: 33.25, height: 44.25)
-        print("offsetBy" + "\(rect.offsetBy(dx: 3, dy: -4))")
-        rectTest(rect.offsetBy(dx: 3, dy: -4), withAimRect: (14.25, 18.25, 33.25, 44.25))
-        rect.offsetInPlace(dx: 3, dy: -4)
+        print("offsetBy" + "\(rect.offsetBy(3, -4))")
+        rectTest(rect.offsetBy(3, -4), withAimRect: (14.25, 18.25, 33.25, 44.25))
+        rect.offsetInPlace(3, -4)
         print("offsetInPlace" + "\(rect)")
         rectTest(rect, withAimRect: (14.25, 18.25, 33.25, 44.25))
         
@@ -200,7 +200,7 @@ class MKMapViewExtensionTests: XCTestCase {
         XCTAssert(!rect.contains(bigRect))
         
         rect = MKMapRect(x: 11.25, y: 22.25, width: 33.25, height: 44.25)
-        let (slice, remainder) = rect.divide(5, fromEdge: .MinXEdge)
+        let (slice, remainder) = rect.divide(5, fromEdge: .minXEdge)
         print("slice" + "\(slice)")
         print("remainder" + "\(remainder)")
         rectTest(slice, withAimRect: (11.25, 22.25, 5, 44.25))
@@ -209,7 +209,7 @@ class MKMapViewExtensionTests: XCTestCase {
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }
@@ -231,15 +231,15 @@ class MKMapViewExtensionTests: XCTestCase {
     let double4: Double = 4
     
     // MARK: Test Helper
-    private func pointTest(point: MKMapPoint, withAimPoint aimPoint: (Double, Double)) {
+    fileprivate func pointTest(_ point: MKMapPoint, withAimPoint aimPoint: (Double, Double)) {
         XCTAssert(point.x == aimPoint.0 && point.y == aimPoint.1)
     }
     
-    private func sizeTest(size: MKMapSize, withAimSize aimSize: (Double, Double)) {
+    fileprivate func sizeTest(_ size: MKMapSize, withAimSize aimSize: (Double, Double)) {
         XCTAssert(size.width == aimSize.0 && size.height == aimSize.1)
     }
     
-    private func rectTest(rect: MKMapRect, withAimRect aimRect: (Double, Double, Double, Double)) {
+    fileprivate func rectTest(_ rect: MKMapRect, withAimRect aimRect: (Double, Double, Double, Double)) {
         XCTAssert(rect.origin.x == aimRect.0 && rect.origin.y == aimRect.1 && rect.size.width == aimRect.2 && rect.size.height == aimRect.3)
     }
 }

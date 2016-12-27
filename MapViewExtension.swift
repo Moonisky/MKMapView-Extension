@@ -6,11 +6,12 @@
 //  Copyright (c) 2015-2016年 星夜暮晨(Semper_Idem). All rights reserved.
 //
 
+import Foundation
 import UIKit
 import MapKit
 
-private let mercatorOffset = 268435456.0
-private let mercatorRadius = 85445659.44705395
+private let mercatorOffset: Double = 268435456.0
+private let mercatorRadius: Double = 85445659.44705395
 
 extension MKMapView {
     
@@ -38,12 +39,12 @@ extension MKMapView {
     }
     
     /// Set current map zoom level based on center coordinate, you also can decided whether it should animate when the map region is changing.
-    func setCenterCoordinate(centerCoordinate: CLLocationCoordinate2D, zoomLevel: UInt, animated: Bool ) {
+    func setCenterCoordinate(_ centerCoordinate: CLLocationCoordinate2D, zoomLevel: UInt, animated: Bool ) {
         // clamp large numbers to 28
         let zoomLevel = min(zoomLevel, 28)
         
         // use the zoom level to compute the region
-        let span = self.coordinateSpanWithCenterCoordinate(centerCoordinate, andZoomLevel: zoomLevel)
+        let span = self.coordinateSpanWithCenterCoordinate(centerCoordinate, zoomLevel: zoomLevel)
         let region = MKCoordinateRegion(center: centerCoordinate, span: span)
         
         // set the region like normal
@@ -51,7 +52,7 @@ extension MKMapView {
     }
     
     /// Get corresponding map region based on zoom level and center coordinate.
-    func getCoordinateRegionWithCenterCoordinate(centerCoordinate: CLLocationCoordinate2D, andZoomLevel: UInt) -> MKCoordinateRegion {
+    func getCoordinateRegion(_ centerCoordinate: CLLocationCoordinate2D, zoomLevel: UInt) -> MKCoordinateRegion {
         // clamp lat/long values to appropriate ranges
         var centerCoordinate = centerCoordinate
         centerCoordinate.latitude = min(max(-90, centerCoordinate.latitude), 90)
@@ -114,20 +115,20 @@ extension MKMapView {
     // MARK: Map UI Handle
     
     /// A Boolean indicating whether the map displays a compass view.
-    @available(iOS, deprecated=9.0, message="showsCompassView is deprecated in iOS 9.0, please use \"showsCompass\" instead")
+    @available(iOS, deprecated: 9.0, message: "showsCompassView is deprecated in iOS 9.0, please use \"showsCompass\" instead")
     var showsCompassView: Bool {
         set(show) {
             if let compassView = MapComponent.sharedInstance.compassView {
                 self.decideView(compassView, shouldShow: show)
             }
             // If not exist, then found it
-            guard let compassView = self.findViewWithName("MKCompassView") else { return }
+            guard let compassView = self.findView("MKCompassView") else { return }
             MapComponent.sharedInstance.compassView = compassView
             self.decideView(compassView, shouldShow: show)
         }
         get {
             if MapComponent.sharedInstance.compassView == nil { return true }
-            return self.findViewWithName("MKCompassView") != nil
+            return self.findView("MKCompassView") != nil
         }
     }
     
@@ -138,13 +139,13 @@ extension MKMapView {
                 self.decideView(legalLabel, shouldShow: show)
             }
             // If not exist, then found it
-            guard let legalLabel = self.findViewWithName("MKAttributionLabel") else { return }
+            guard let legalLabel = self.findView("MKAttributionLabel") else { return }
             MapComponent.sharedInstance.legalLabel = legalLabel
             self.decideView(legalLabel, shouldShow: show)
         }
         get {
             if MapComponent.sharedInstance.legalLabel == nil { return true }
-            return self.findViewWithName("MKAttributionLabel") != nil
+            return self.findView("MKAttributionLabel") != nil
         }
     }
     
@@ -161,40 +162,40 @@ extension MKMapView {
                 self.decideView(mapInfoImageView, shouldShow: show)
             }
             // If not exist, then found it
-            guard let mapInfoImageView = self.findViewWithName(nil, OrClass: UIImageView.self) else { return }
+            guard let mapInfoImageView = self.findView(nil, className: UIImageView.self) else { return }
             MapComponent.sharedInstance.mapInfoImageView = mapInfoImageView
             self.decideView(mapInfoImageView, shouldShow: show)
         }
         get {
             if MapComponent.sharedInstance.mapInfoImageView == nil { return true }
-            return self.findViewWithName(nil, OrClass: UIImageView.self) != nil
+            return self.findView(nil, className: UIImageView.self) != nil
         }
     }
     
     // MARK: Helper Methods
     
-    private func findViewWithName(name: String? = nil, OrClass className: AnyClass? = nil) -> UIView? {
+    fileprivate func findView(_ name: String? = nil, className: AnyClass? = nil) -> UIView? {
         var cla: AnyClass? = className
-        if let name = name, className = NSClassFromString(name) {
+        if let name = name, let className = NSClassFromString(name) {
             cla = className
         }
         if cla == nil { return nil }
-        for view in self.subviews where view.isKindOfClass(cla!) {
+        for view in self.subviews where view.isKind(of: cla!) {
             if view is UIImageView && view.tag != 0 { return nil }  // Handle Image View
             return view
         }
         return nil
     }
     
-    private func decideView(view: UIView, shouldShow show: Bool) {
+    fileprivate func decideView(_ view: UIView, shouldShow show: Bool) {
         if show {
             self.addSubview(view)
             view.alpha = 0
-            UIView.animateWithDuration(0.5) {
+            UIView.animate(withDuration: 0.5) {
                 view.alpha = 1
             }
         } else {
-            UIView.animateWithDuration(0.5, animations: {
+            UIView.animate(withDuration: 0.5, animations: {
                 view.alpha = 0
             }) { finish in
                 view.removeFromSuperview()
@@ -202,7 +203,7 @@ extension MKMapView {
         }
     }
     
-    private func coordinateSpanWithCenterCoordinate(center: CLLocationCoordinate2D, andZoomLevel zoomLevel: UInt) -> MKCoordinateSpan {
+    fileprivate func coordinateSpanWithCenterCoordinate(_ center: CLLocationCoordinate2D, zoomLevel: UInt) -> MKCoordinateSpan {
         // convert center coordinate to pixel space
         let centerPixelX = center.longitude.pixelSpaceXForLongitude
         let centerPixelY = center.latitude.pixelSpaceYForLatitude
@@ -238,22 +239,25 @@ extension MKMapView {
 // MARK: Map Conversion Methods
 
 private extension Double {
+    
     var pixelSpaceXForLongitude: Double {
-        return round(mercatorOffset + mercatorRadius * self * M_PI / 180)
+        let result: Double = mercatorOffset + mercatorRadius * self * M_PI / 180
+        
+        return result.rounded()
     }
     
     var pixelSpaceYForLatitude: Double {
         if self == 90 { return 0 }
         else if self == -90 { return mercatorOffset * 2 }
-        else { return round(mercatorOffset - mercatorRadius * log((1 + sin(self * M_PI / 180)) / (1 - sin(self * M_PI / 180))) / 2) }
+        else { return (mercatorOffset - mercatorRadius * log((1 + sin(self * M_PI / 180)) / (1 - sin(self * M_PI / 180))) / 2).rounded() }
     }
     
     var longitudeForPixelSpaceX: Double {
-        return ((round(self) - mercatorOffset) / mercatorRadius) * 180 / M_PI
+        return ((self.rounded() - mercatorOffset) / mercatorRadius) * 180 / M_PI
     }
     
     var latitudeForPixelSpaceY: Double {
-        return (M_PI / 2 - 2 * atan(exp((round(self) - mercatorOffset) / mercatorRadius))) * 180 / M_PI
+        return (M_PI / 2 - 2 * atan(exp((self.rounded() - mercatorOffset) / mercatorRadius))) * 180 / M_PI
     }
 }
 
@@ -301,47 +305,39 @@ extension MKMapRect {
     mutating func standardizeInPlace() { self = standardized }
     mutating func makeIntegralInPlace() { self = integral }
     
-    @warn_unused_result(mutable_variant="insetInPlace")
-    func insetBy(dx dx: Double, dy: Double) -> MKMapRect { return MKMapRectInset(self.standardized, dx, dy) }
+    func insetBy(_ dx: Double, _ dy: Double) -> MKMapRect { return MKMapRectInset(self.standardized, dx, dy) }
     
-    mutating func insetInPlace(dx dx: Double, dy: Double) { self = insetBy(dx: dx, dy: dy) }
+    mutating func insetInPlace(_ dx: Double, _ dy: Double) { self = insetBy(dx, dy) }
     
-    @warn_unused_result(mutable_variant="offsetInPlace")
-    func offsetBy(dx dx: Double, dy: Double) -> MKMapRect { return MKMapRectOffset(self.standardized, dx, dy) }
+    func offsetBy(_ dx: Double, _ dy: Double) -> MKMapRect { return MKMapRectOffset(self.standardized, dx, dy) }
     
-    mutating func offsetInPlace(dx dx: Double, dy: Double) { self = offsetBy(dx: dx, dy: dy) }
+    mutating func offsetInPlace(_ dx: Double, _ dy: Double) { self = offsetBy(dx, dy) }
     
-    @warn_unused_result(mutable_variant="unionInPlace")
-    func union(rect: MKMapRect) -> MKMapRect { return MKMapRectUnion(self.standardized, rect.standardized) }
+    func union(_ rect: MKMapRect) -> MKMapRect { return MKMapRectUnion(self.standardized, rect.standardized) }
     
-    mutating func unionInPlace(rect: MKMapRect) { self = union(rect.standardized) }
+    mutating func unionInPlace(_ rect: MKMapRect) { self = union(rect.standardized) }
     
-    @warn_unused_result(mutable_variant = "intersectInPlace")
-    func intersect(rect: MKMapRect) -> MKMapRect { return MKMapRectIntersection(self.standardized, rect.standardized) }
+    func intersect(_ rect: MKMapRect) -> MKMapRect { return MKMapRectIntersection(self.standardized, rect.standardized) }
     
-    mutating func intersectInPlace(rect: MKMapRect) { self = intersect(rect.standardized) }
+    mutating func intersectInPlace(_ rect: MKMapRect) { self = intersect(rect.standardized) }
     
-    @warn_unused_result
-    func divide(atDistance: Double, fromEdge: MKMapRectEdge) -> (slice: MKMapRect, remainder: MKMapRect) {
+    func divide(_ atDistance: Double, fromEdge: MKMapRectEdge) -> (slice: MKMapRect, remainder: MKMapRect) {
         var slice = MKMapRect.zero
         var remainder = MKMapRect.zero
         MKMapRectDivide(self.standardized, &slice, &remainder, atDistance, fromEdge)
         return (slice, remainder)
     }
     
-    @warn_unused_result
-    func contains(rect: MKMapRect) -> Bool { return MKMapRectContainsRect(self.standardized, rect.standardized) }
+    func contains(_ rect: MKMapRect) -> Bool { return MKMapRectContainsRect(self.standardized, rect.standardized) }
     
-    @warn_unused_result
-    func contains(point: MKMapPoint) -> Bool { return MKMapRectContainsPoint(self.standardized, point) }
+    func contains(_ point: MKMapPoint) -> Bool { return MKMapRectContainsPoint(self.standardized, point) }
     
-    @warn_unused_result
-    func intersects(rect: MKMapRect) -> Bool { return MKMapRectIntersectsRect(self.standardized, rect.standardized) }
+    func intersects(_ rect: MKMapRect) -> Bool { return MKMapRectIntersectsRect(self.standardized, rect.standardized) }
 }
 
 extension MKMapRect: Equatable { }
 
-public func ==(lhs: MKMapRect, rhs: MKMapRect) -> Bool {
+public func == (lhs: MKMapRect, rhs: MKMapRect) -> Bool {
     return MKMapRectEqualToRect(lhs.standardized, rhs.standardized)
 }
 
@@ -360,8 +356,7 @@ public extension MKMapPoint {
 
 extension MKMapPoint: Equatable { }
 
-@warn_unused_result
-public func ==(lhs: MKMapPoint, rhs: MKMapPoint) -> Bool {
+public func == (lhs: MKMapPoint, rhs: MKMapPoint) -> Bool {
     return lhs.x == rhs.x && lhs.y == rhs.y
 }
 
@@ -380,8 +375,7 @@ extension MKMapSize {
 
 extension MKMapSize: Equatable { }
 
-@warn_unused_result
-public func ==(lhs: MKMapSize, rhs: MKMapSize) -> Bool {
+public func == (lhs: MKMapSize, rhs: MKMapSize) -> Bool {
     return lhs.width == rhs.width && lhs.height == rhs.height
 }
 

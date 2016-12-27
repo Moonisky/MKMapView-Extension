@@ -27,12 +27,12 @@ class ViewController: UIViewController {
             locationManager.startUpdatingLocation()
             locationManager.startUpdatingHeading()
             
-            mapView.userTrackingMode = .FollowWithHeading
-            btnCompass.hidden = false
+            mapView.userTrackingMode = .followWithHeading
+            btnCompass.isHidden = false
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         lblZoomLevel.text = "Current Zoom Level: \(mapView.zoomLevel)"
     }
@@ -42,36 +42,36 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func handleLBAttributedLabel(sender: UIButton) {
+    @IBAction func handleLBAttributedLabel(_ sender: UIButton) {
         let showsAttributionLabel = mapView.showsLegalLabel
-        sender.setTitle(showsAttributionLabel ? "Show Label" : "Hide Label", forState: .Normal)
+        sender.setTitle(showsAttributionLabel ? "Show Label" : "Hide Label", for: UIControlState())
         mapView.showsLegalLabel = !showsAttributionLabel
     }
     
-    @IBAction func handleRBImageView(sender: UIButton) {
+    @IBAction func handleRBImageView(_ sender: UIButton) {
         let showsImageView = mapView.showsMapInfoImageView
-        sender.setTitle(showsImageView ? "Show Image" : "Hide Image", forState: .Normal)
+        sender.setTitle(showsImageView ? "Show Image" : "Hide Image", for: UIControlState())
         mapView.showsMapInfoImageView = !showsImageView
     }
 
-    @IBAction func handleZoomIn(sender: UIButton) {
+    @IBAction func handleZoomIn(_ sender: UIButton) {
         mapView.zoomIn()
         lblZoomLevel.text = "Current Zoom Level: \(mapView.zoomLevel)"
     }
     
-    @IBAction func handleZoomOut(sender: UIButton) {
+    @IBAction func handleZoomOut(_ sender: UIButton) {
         mapView.zoomOut()
         lblZoomLevel.text = "Current Zoom Level: \(mapView.zoomLevel)"
     }
     
-    @IBAction func handleCompass(sender: UIButton) {
+    @IBAction func handleCompass(_ sender: UIButton) {
         let showsCompass: Bool
         if #available(iOS 9.0, *) {
             showsCompass = mapView.showsCompass
         } else {
             showsCompass = mapView.showsCompassView
         }
-        sender.setTitle(showsCompass ? "Show Compass" : "Hide Compass", forState: .Normal)
+        sender.setTitle(showsCompass ? "Show Compass" : "Hide Compass", for: UIControlState())
         if #available(iOS 9.0, *) {
             mapView.showsCompass = !showsCompass
         } else {
