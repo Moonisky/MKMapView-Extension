@@ -12,10 +12,11 @@
 		D81998C91C562A25004F8211 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81998C71C562A25004F8211 /* Main.storyboard */; };
 		D81998CB1C562A25004F8211 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D81998CA1C562A25004F8211 /* Assets.xcassets */; };
 		D81998CE1C562A25004F8211 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81998CC1C562A25004F8211 /* LaunchScreen.storyboard */; };
-		D82AF8F11C573FD300A622CA /* MKMapViewExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82AF8F01C573FD300A622CA /* MKMapViewExtensionTests.swift */; };
 		D82AF9011C57762700A622CA /* MapViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82AF9001C57762700A622CA /* MapViewExtension.swift */; };
 		D82AF9021C57762700A622CA /* MapViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82AF9001C57762700A622CA /* MapViewExtension.swift */; };
 		D82AF90A1C57763E00A622CA /* MKMapViewExtensionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82AF9091C57763E00A622CA /* MKMapViewExtensionUITests.swift */; };
+		D8DF29091E123FEB00FA91A8 /* MapViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82AF9001C57762700A622CA /* MapViewExtension.swift */; };
+		D8DF290A1E12400200FA91A8 /* MKMapViewExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82AF8F01C573FD300A622CA /* MKMapViewExtensionTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +47,7 @@
 		D82AF8EE1C573FD300A622CA /* MKMapViewExtensionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MKMapViewExtensionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D82AF8F01C573FD300A622CA /* MKMapViewExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapViewExtensionTests.swift; sourceTree = "<group>"; };
 		D82AF8F21C573FD300A622CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D82AF9001C57762700A622CA /* MapViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewExtension.swift; path = ../MapViewExtension.swift; sourceTree = "<group>"; };
+		D82AF9001C57762700A622CA /* MapViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewExtension.swift; path = ../Source/MapViewExtension.swift; sourceTree = "<group>"; };
 		D82AF9071C57763E00A622CA /* MKMapViewExtensionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MKMapViewExtensionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D82AF9091C57763E00A622CA /* MKMapViewExtensionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapViewExtensionUITests.swift; sourceTree = "<group>"; };
 		D82AF90B1C57763E00A622CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -200,7 +201,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "星夜暮晨";
 				TargetAttributes = {
 					D81998BF1C562A25004F8211 = {
@@ -281,7 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D82AF8F11C573FD300A622CA /* MKMapViewExtensionTests.swift in Sources */,
+				D8DF290A1E12400200FA91A8 /* MKMapViewExtensionTests.swift in Sources */,
 				D82AF9021C57762700A622CA /* MapViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D82AF90A1C57763E00A622CA /* MKMapViewExtensionUITests.swift in Sources */,
+				D8DF29091E123FEB00FA91A8 /* MapViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,8 +344,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -386,8 +390,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -406,6 +412,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
