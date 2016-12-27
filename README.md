@@ -148,7 +148,7 @@ Contributions to the project are welcome. PR or issue are both OK for me.
 
 ### 2016.12.27
 
-1. Update project to Swift 3 (Thanks for Shams Ahmed](https://github.com/shams-ahmed)'s [PR](https://github.com/Moonisky/MKMapView-Extension/pull/1)).
+1. Update project to Swift 3 (Thanks for [Shams Ahmed](https://github.com/shams-ahmed)'s [PR](https://github.com/Moonisky/MKMapView-Extension/pull/1)).
 2. expose access levels.
 3. complete comments.
 4. complete `MKMapPoint`、`MKMapSize`、`MKMapRect` extensions.
